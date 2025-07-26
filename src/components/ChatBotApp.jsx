@@ -1,8 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './ChatBotApp.css'
 
-const ChatBotApp = () => {
-  return (
+const ChatBotApp = ({ onGoBack, chats, setChats }) => {
+    const [inputValue, setInputValue] = useState('');
+    const [messages, setMessages] = useState(chats[0]?.messages || []) // if chats[0] is null then create an empty array
+
+    const handleInputChange = (e) => {
+        setInputValue(e.target.value);
+    }
+
+    return (
     <div className="chat-app">
         <div className='chat-list'>
             <div className="chat-list-header">
@@ -25,7 +32,7 @@ const ChatBotApp = () => {
         <div className="chat-window">
             <div className="chat-title">
                 <h3>Chat with AI</h3>
-                <i className="bx bx-arrow-right arrow"></i>
+                <i className="bx bx-arrow-right arrow" onClick={onGoBack}></i>
             </div>
             <div className="chat">
                 <div className="prompt">
